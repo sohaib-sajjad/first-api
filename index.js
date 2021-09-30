@@ -25,7 +25,7 @@ process.exit;
 } )
 
 app.get('/',function(req,res){
-    res.json({"message": "welcome to crud api's"});
+    res.send("hello world");
 });
 
 require('./app/routes/routes')(app);
