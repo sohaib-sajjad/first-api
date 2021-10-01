@@ -1,7 +1,9 @@
 const express=require('express');
 const bodyparser=require('body-parser');
 const mongoose = require('mongoose');
-const dburl = require('./database/myurl.js')
+const dburl  = process.env.MONGODB_URI;
+
+
 
 //create express app
 const app=express();
@@ -12,7 +14,7 @@ app.use(bodyparser.urlencoded({extended : false}));
 app.use(bodyparser.json());
 
 mongoose.Promise = global.Promise;
-mongoose.connect(dburl.url,{
+mongoose.connect(dburl,{
 useNewUrlParser :true
 }) .then(() =>{ 
     console.log('database is connected');
@@ -31,8 +33,10 @@ app.get('/',function(req,res){
 require('./app/routes/routes')(app);
 
 
-const PORT=3000||process.env.PORT;
+const PORT= 3000 || process.env.PORT;
 app.listen(PORT,()=>{
     console.log(`app is live at ${PORT}`);
 });
+
+// heroku config:set MONGODB_URI="mongodb+srv://sohaib:Myself.me1@cluster0.6ve9r.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 
