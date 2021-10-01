@@ -1,7 +1,8 @@
 const express=require('express');
 const bodyparser=require('body-parser');
-const mongoose = require('mongoose');
-const dburl  = process.env.MONGODB_URI;
+var mongoose = require('mongoose');
+const dburl  = "mongodb+srv://sohaib:Myself.me1@cluster0.6ve9r.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+
 
 
 
@@ -13,18 +14,23 @@ app.use(bodyparser.urlencoded({extended : false}));
 //parse application json
 app.use(bodyparser.json());
 
-mongoose.Promise = global.Promise;
-mongoose.connect(dburl,{
-useNewUrlParser :true
-}) .then(() =>{ 
-    console.log('database is connected');
-    process.exit;
- }  )
-.catch( (err) => {
-console.log( 'could not connect to database'  );
-process.exit;
+// mongoose.Promise = global.Promise;
+// mongoose.connect(dburl,{
+// useNewUrlParser :true
+// }) .then(() =>{ 
+//     console.log('database is connected');
+    // process.exit;
+//  }  )
+mongoose.connect(process.env.MONGODB_URI);
 
-} )
+
+// .catch( (err) => {
+// console.log( 'could not connect to database'  );
+// process.exit;
+
+// } )
+
+
 
 app.get('/',function(req,res){
     res.send("hello world");
