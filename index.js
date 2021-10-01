@@ -14,22 +14,21 @@ app.use(bodyparser.urlencoded({extended : false}));
 //parse application json
 app.use(bodyparser.json());
 
-// mongoose.Promise = global.Promise;
-// mongoose.connect(dburl,{
-// useNewUrlParser :true
-// }) .then(() =>{ 
-//     console.log('database is connected');
-    // process.exit;
-//  }  )
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.Promise = global.Promise;
+mongoose.connect(dburl,{
+useNewUrlParser :true
+}) .then(() =>{ 
+    console.log('database is connected');
+    process.exit;
+ }  )
 
 
-// .catch( (err) => {
-// console.log( 'could not connect to database'  );
-// process.exit;
 
-// } )
+.catch( (err) => {
+console.log( 'could not connect to database'  );
+process.exit;
 
+} )
 
 
 app.get('/',function(req,res){
